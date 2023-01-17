@@ -33,8 +33,9 @@ class LogitRegression:
         acc = np.sum(ground_truth == prediction) / len(ground_truth)
         return acc
 
-
 # TEST
+
+
 if __name__ == "__main__":
     from sklearn import datasets
     from sklearn.model_selection import train_test_split
@@ -49,10 +50,10 @@ if __name__ == "__main__":
     logit_reg_fc.fit(X_train, y_train)
     y_val_predict = logit_reg_fc.predict(X_val)
     acc = logit_reg_fc.evaluate(y_val, y_val_predict)
-    print("Accuracy from scratch: ", acc)
+    print("Logit Reg from scratch accuracy: ", acc)
 
     logit_reg = linear_model.LogisticRegression()
     logit_reg.fit(X_train, y_train)
     y_val_predict = logit_reg.predict(X_val)
     acc = accuracy_score(y_val, y_val_predict)
-    print('Accuracy:', acc)
+    print('Logit Reg with sklearn accuracy:', acc)
