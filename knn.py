@@ -2,8 +2,7 @@ import numpy as np
 from distance import Distance
 from collections import Counter
 
-
-class KnnFC:
+class KnnNumpy:
     # Update more method in the future
     def __init__(self, k=5, method="brute_force"):
         self.k = k
@@ -42,7 +41,7 @@ if __name__ == '__main__':
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=5)
 
-    knn_fc = KnnFC(k=5)
+    knn_fc = KnnNumpy(k=5)
     knn_fc.fit(X_train, y_train)
     predictions = np.array([knn_fc.predict(x) for x in X_test])
     acc = np.sum(predictions == y_test) / len(y_test)

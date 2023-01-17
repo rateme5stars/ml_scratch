@@ -1,7 +1,6 @@
 import numpy as np
 
-
-class LogitRegression:
+class LogitRegressionNumpy:
     def __init__(self, lr=0.001, epochs=100):
         self.lr = lr
         self.epochs = epochs
@@ -35,7 +34,6 @@ class LogitRegression:
 
 # TEST
 
-
 if __name__ == "__main__":
     from sklearn import datasets
     from sklearn.model_selection import train_test_split
@@ -46,7 +44,7 @@ if __name__ == "__main__":
     X, y = dataset.data, dataset.target
     X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=3)
 
-    logit_reg_fc = LogitRegression(lr=0.01, epochs=1000)
+    logit_reg_fc = LogitRegressionNumpy(lr=0.01, epochs=1000)
     logit_reg_fc.fit(X_train, y_train)
     y_val_predict = logit_reg_fc.predict(X_val)
     acc = logit_reg_fc.evaluate(y_val, y_val_predict)
