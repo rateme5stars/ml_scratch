@@ -3,7 +3,6 @@ from operations import Operation
 import matplotlib.pyplot as plt
 import random
 
-random.seed(42)
 op = Operation()
 
 
@@ -88,7 +87,7 @@ class KmeansFC:
 if __name__ == "__main__":
     from sklearn.datasets import make_blobs
 
-    X, y = make_blobs(centers=4, n_samples=500, n_features=2, shuffle=True, random_state=42)
+    X, y = make_blobs(centers=3, n_samples=500, n_features=2, shuffle=True, random_state=3)
 
     clusters = len(set(y))
 
