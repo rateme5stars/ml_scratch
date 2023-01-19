@@ -1,8 +1,10 @@
-import numpy as np
 from distance import Distance
 from collections import Counter
+from operations import Operation
+op = Operation()
 
-class KnnNumpy:
+
+class KnnFC:
     # Update more method in the future
     def __init__(self, k=5, method="brute_force"):
         self.k = k
@@ -17,7 +19,7 @@ class KnnNumpy:
         distances = [Distance.euclidean(x, data_point) for data_point in X_train]
 
         # Indexing neighbors by distance and get k nearest neighbors indices
-        knn_id = np.argsort(distances)[:self.k]
+        knn_id = op.argsort(distances)[:self.k]
 
         # Get knn label
         knn_labels = [self.y_train[i] for i in knn_id]
@@ -28,6 +30,16 @@ class KnnNumpy:
             knn_labels = self._brute_force(x)
             prediction = Counter(knn_labels).most_common(1)[0][0]
             return prediction
+
+    def evaluate(self, ground_truth, prediction):
+        correct_predictions = 0
+        for i in range(len(ground_truth)):
+            if ground_truth[i] == prediction[i]:
+                correct_predictions += 1
+        acc = correct_predictions / len(ground_truth)
+        return acc
+
+# TEST
 
 
 if __name__ == '__main__':
@@ -41,11 +53,11 @@ if __name__ == '__main__':
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=5)
 
-    knn_fc = KnnNumpy(k=5)
-    knn_fc.fit(X_train, y_train)
-    predictions = np.array([knn_fc.predict(x) for x in X_test])
-    acc = np.sum(predictions == y_test) / len(y_test)
-    print("KNN from scratch accuracy: ", acc)
+    knn_fc = KnnFC(k=5)
+    knn_fc.fit(X_train.tolist(), y_train.tolist())
+    predictions = [knn_fc.predict(x) for x in X_test]
+    acc_fc = knn_fc.evaluate(y_test, predictions)
+    print("KNN from scratch accuracy: ", acc_fc)
 
     knn = KNeighborsClassifier(n_neighbors=5, algorithm='brute')
     knn.fit(X_train, y_train)

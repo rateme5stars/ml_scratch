@@ -1,5 +1,5 @@
 import numbers
-import numpy as np  # only use for calculate sigmoid function
+import numpy as np  # only use to calculate sigmoid function
 
 
 class Operation:
@@ -86,3 +86,6 @@ class Operation:
         x_np = np.array(x)
         sigmoid = 1 / (1 + np.exp(-x_np))
         return sigmoid.tolist()
+
+    def argsort(self, x):
+        return sorted(range(len(x)), key=x.__getitem__)
