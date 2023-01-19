@@ -1,4 +1,5 @@
 import numbers
+import numpy as np  # only use for calculate sigmoid function
 
 
 class Operation:
@@ -80,3 +81,8 @@ class Operation:
 
     def pow_n(self, x, n):
         return [num ** n for num in x]
+
+    def sigmoid(self, x):
+        x_np = np.array(x)
+        sigmoid = 1 / (1 + np.exp(-x_np))
+        return sigmoid.tolist()
