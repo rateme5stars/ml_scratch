@@ -76,8 +76,15 @@ class Operation:
                 result[i] = tmp
         return result
 
-    def mean(self, x):
-        return (sum(x) / len(x))
+    def mean(self, x, axis=None):
+        if axis == 0:
+            result = []
+            x_T = self.transpose(x)
+            for row in x_T:
+                result.append(round(sum(row) / len(row), 8))
+            return result
+        else:
+            return (sum(x) / len(x))
 
     def pow_n(self, x, n):
         return [num ** n for num in x]
@@ -89,3 +96,13 @@ class Operation:
 
     def argsort(self, x):
         return sorted(range(len(x)), key=x.__getitem__)
+
+    def argmin(self, x):
+        min_value = min(x)
+        min_id = x.index(min_value)
+        return min_id
+
+    def argmax(self, x):
+        max_value = max(x)
+        max_id = x.index(max_value)
+        return max_id
